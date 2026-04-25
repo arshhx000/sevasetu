@@ -58,10 +58,10 @@ function FieldLabel({ children }) {
 
 function SocialAuthButtons() {
   const providers = [
-    { key: 'google', label: 'Google', icon: 'G' },
-    { key: 'apple', label: 'Apple', icon: 'A' },
-    { key: 'microsoft', label: 'Microsoft', icon: 'M' }
-  ];
+  { key: 'google', label: 'Google', icon: 'google.jfif' },
+  { key: 'apple', label: 'Apple', icon: '/apple.png' },
+  { key: 'microsoft', label: 'Microsoft', icon: 'msoft.png' }
+];
 
   return (
     <div className="mt-4 border-t border-black/50 pt-4">
@@ -74,7 +74,11 @@ function SocialAuthButtons() {
             aria-label={`Continue with ${provider.label}`}
             className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white text-sm font-semibold text-seva-ink transition hover:bg-black/[50]"
           >
-            {provider.icon}
+            <img
+  src={provider.icon}
+  alt={provider.label}
+  className="h-5 w-5 object-contain"
+/>
           </button>
         ))}
       </div>

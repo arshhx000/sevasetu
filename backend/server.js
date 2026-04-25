@@ -17,9 +17,34 @@ const adminRoutes = require('./routes/adminRoutes');
 const { complaintUploadErrorHandler } = require('./middleware/uploadMiddleware');
 
 const app = express();
+let initPromise = null;
 
 app.use(cors());
 app.use(express.json());
+
+function getInitPromise() {
+  if (!initPromise) {
+    initPromise = (async () => {
+      await connectDB(process.env.MONGODB_URI);
+      await seedCategories();
+      await seedDemoUsers();
+      await seedDemoComplaints();
+    })().catch((error) => {
+      initPromise = null;
+      throw error;
+    });
+  }
+  return initPromise;
+}
+
+app.use(async (_req, res, next) => {
+  try {
+    await getInitPromise();
+    return next();
+  } catch (error) {
+    return res.status(500).json({ message: 'Initialization failed', error: error.message });
+  }
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
@@ -185,21 +210,20 @@ async function seedCategories() {
   }
 }
 
-async function start() {
+async function startLocalServer() {
   try {
-    await connectDB(process.env.MONGODB_URI);
-    await seedCategories();
-    await seedDemoUsers();
-    await seedDemoComplaints();
+    await getInitPromise();
 
     const port = Number(process.env.PORT || 5000);
     app.listen(port, () => {
       console.log(`Backend running on http://localhost:${port}`);
     });
   } catch (error) {
-    console.error('Failed to start backend:', error.message);
-    process.exit(1);
+    console.error('Failed to start backend:', error);
   }
 }
 module.exports = app;
-start();
+
+if (process.env.VERCEL !== '1') {
+  startLocalServer();
+}
