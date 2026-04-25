@@ -19,8 +19,25 @@ const { complaintUploadErrorHandler } = require('./middleware/uploadMiddleware')
 const app = express();
 let initPromise = null;
 
-app.use(cors());
+const allowedOrigins = String(process.env.CORS_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Origin not allowed by CORS'));
+  }
+}));
 app.use(express.json());
+app.set('trust proxy', 1);
+
+app.get('/api/health', (_req, res) => {
+  res.json({ ok: true, timestamp: new Date().toISOString() });
+});
 
 function getInitPromise() {
   if (!initPromise) {
@@ -53,10 +70,6 @@ app.use('/api/officers', officerRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/admin', adminRoutes);
 
-app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, timestamp: new Date().toISOString() });
-});
-
 app.use(complaintUploadErrorHandler);
 
 app.use((_req, res) => {
@@ -64,6 +77,9 @@ app.use((_req, res) => {
 });
 
 app.use((error, _req, res, _next) => {
+  if (error.message === 'Origin not allowed by CORS') {
+    return res.status(403).json({ message: error.message });
+  }
   return res.status(500).json({ message: 'Internal server error', error: error.message });
 });
 
