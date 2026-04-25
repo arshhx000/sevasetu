@@ -1,0 +1,9 @@
+node_modules/
+.env
+*.log
+backend-dev.err.log
+backend-dev.out.log
+server-current.err.log
+server-current.log
+server-runtime.err.log
+server-runtime.log

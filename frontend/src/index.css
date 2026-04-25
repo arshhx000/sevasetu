@@ -1,0 +1,93 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-body text-slate-100;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(55% 40% at 73% 40%, rgba(26, 228, 215, 0.95) 0%, rgba(26, 228, 215, 0.35) 35%, rgba(0, 0, 0, 0) 65%),
+    radial-gradient(70% 45% at 82% 90%, rgba(172, 255, 220, 0.85) 0%, rgba(172, 255, 220, 0.18) 45%, rgba(0, 0, 0, 0) 72%),
+    radial-gradient(75% 60% at 38% 30%, rgba(0, 8, 12, 0.98) 0%, rgba(0, 23, 27, 0.95) 55%, rgba(2, 55, 50, 0.9) 100%),
+    linear-gradient(180deg, #001114 0%, #00332f 55%, #b7dac6 100%);
+}
+
+.soft-card {
+  @apply bg-seva-panel rounded-soft border border-black/5 shadow-mac;
+}
+
+.input {
+ @apply w-full rounded-2xl border border-white/20 px-4 py-3 text-sm text-white placeholder-white/50 outline-none focus:ring-2 focus:ring-cyan-400/40;
+background-color: #00000065;
+}
+
+.btn-primary {
+  @apply rounded-2xl bg-seva-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95 ;
+  background-color: #9193f6
+}
+
+.btn-secondary {
+  @apply rounded-2xl border border-black/20 bg-white px-4 py-2 text-sm ;
+}
+
+.app-shell {
+  font-family: 'Manrope', sans-serif;
+}
+
+.app-shell .font-display {
+  font-family: 'Sora', sans-serif;
+}
+
+.app-shell .soft-card {
+  @apply rounded-2xl border border-white/10 bg-white/[0.05] shadow-[0_12px_30px_rgba(2,6,23,0.15)];
+}
+
+.app-shell .soft-card-primary {
+  @apply border-white/30 bg-white/[0.12] shadow-[0_22px_50px_rgba(2,6,23,0.25)];
+}
+
+.app-shell .soft-card-secondary {
+  @apply border-white/20 bg-white/[0.08] shadow-[0_16px_34px_rgba(2,6,23,0.18)];
+}
+
+.app-shell .soft-card-tertiary {
+  @apply border-white/10 bg-white/[0.04] shadow-[0_8px_20px_rgba(2,6,23,0.13)];
+}
+
+.app-shell .input {
+  @apply border-white/15 bg-white/[0.04] text-slate-100 placeholder:text-slate-400 focus:border-blue-400/55 focus:ring-blue-400/30;
+}
+
+.app-shell .btn-primary {
+  @apply bg-emerald-500 text-slate-950 hover:bg-emerald-400;
+}
+
+.app-shell .btn-secondary {
+  @apply border-white/20 bg-white/[0.05] text-slate-100 hover:bg-white/[0.08];
+}
+
+.login-shell {
+  font-family: 'Manrope', sans-serif;
+}
+
+.login-shell .font-display {
+  font-family: 'Sora', sans-serif;
+}
+
+.login-shell .soft-card {
+  @apply rounded-2xl border border-white/10 bg-white/[0.03] shadow-none;
+}
+
+.login-shell .input {
+  @apply border-white/15 bg-white/[0.04] text-slate-100 placeholder:text-slate-400 focus:border-blue-400/55 focus:ring-blue-400/30;
+}
+
+.login-shell .btn-primary {
+  @apply bg-emerald-500 text-slate-950 hover:bg-emerald-400;
+}
+
+.login-shell .btn-secondary {
+  @apply border-white/20 bg-white/[0.05] text-slate-100 hover:bg-white/[0.08];
+}
