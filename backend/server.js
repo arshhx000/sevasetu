@@ -201,5 +201,5 @@ async function start() {
     process.exit(1);
   }
 }
-
+module.exports = app;
 start();

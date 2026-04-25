@@ -32,7 +32,6 @@ export default function AppLayout({ user, onLogout }) {
         className="absolute inset-0 -z-20 backdrop-blur-xl"
         style={{
           backgroundImage: "url('/backgrounddta.jpg')",
-          backgroundSize: "cover",
           backgroundPosition: "center 65%",
           backgroundAttachment: "fixed",
           backgroundSize: "180%",
